@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>stopWatch</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="time">
+            <span>Hours</span>
+            <span class="digit" id="hr">00</span>
+            |
+            <span>Minutes</span>
+            <span class="digit" id="min">00</span>
+            |
+            <span>Seconds</span>
+            <span class="digit" id="sec">00</span>
+            |
+            <span class="digit" id="mls">00</span>
+        </div>
+        <div class="button-container">
+            <button class="btn" id="start" onclick="start()">Start</button>
+            <button class="btn" id="stop" onclick="stop()">Stop</button>
+            <h1>Refresh The page<br> To start The StopWatch</h1>
+        </div>
+    </div>
+    </body>
+<script>
+    var sec = 0;
+    var min = 0;
+    var hr = 0;
+    var mls = 0;
+    var stbtn = document.querySelector('#start')
+    function start() {
+        timer = true;
+        stopWatch()
+        stbtn.removeAttribute('onclick', '');
+    }
+    function stop() {
+        timer = false
+        stbtn.setAttribute('onclick', 'start()');
+    }
+    function stopWatch() {
+        if (timer) {
+            mls = mls + 1;
+            if (mls == 100 ) {
+                sec = sec + 1;
+                mls = 0;
+            }
+            if (sec == 60) {
+                min = min + 1;
+                sec = 0;
+            }
+            if (min == 60) {
+                hr = hr + 1;
+                min = 0;
+                sec = 0;
+            }
+            var x = hr;
+            var n = min;
+            var z = sec;
+            var y = mls;
+            if (x < 10 || n < 10 || z < 10 || y < 10){
+                x = "0" + x; n = "0" + n; z = "0" + z;  y = "0" + y;
+            }
+            document.getElementById('mls').innerHTML = y;
+            document.getElementById('sec').innerHTML = z;
+            document.getElementById('min').innerHTML = n;
+            document.getElementById('hr').innerHTML = x;
+            setTimeout("stopWatch()", 10)
+        }
+    }
+</script>
+</body>
+</html>
